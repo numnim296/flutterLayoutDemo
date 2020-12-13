@@ -2,8 +2,6 @@
 
 //------------------------- TapboxA ----------------------------------
 
-
-
 import 'package:flutter/material.dart';
 
 class TapboxA extends StatefulWidget {
@@ -41,5 +39,4 @@ class _TapboxAState extends State<TapboxA> {
     );
   }
 }
-
 

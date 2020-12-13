@@ -95,24 +95,24 @@ class _MyHomePageState extends State<MyHomePage> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           GestureDetector(
-              onTap: () {
-                Navigator.push(
+            onTap:(){
+              Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => TapboxA()),
                 );
               },
-              child: _buildButtonColumn(color, Icons.call, 'CALL')),
+            child: _buildButtonColumn(color, Icons.call, 'CALL')),
           GestureDetector(
-            onTap: () {
-                Navigator.push(
+            onTap:(){
+              Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => ParentWidget()),
                 );
               },
             child: _buildButtonColumn(color, Icons.near_me, 'ROUTE')),
           GestureDetector(
-            onTap: () {
-                Navigator.push(
+            onTap:(){
+              Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => ParentWidgetC()),
                 );
@@ -170,28 +170,28 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
+
 class FavoriteWidget extends StatefulWidget {
   @override
   _FavoriteWidgetState createState() => _FavoriteWidgetState();
 }
-
 class _FavoriteWidgetState extends State<FavoriteWidget> {
   bool _isFavorited = true;
   int _favoriteCount = 41;
   // ···
   void _toggleFavorite() {
-    setState(() {
-      if (_isFavorited) {
-        _favoriteCount -= 1;
-        _isFavorited = false;
-      } else {
-        _favoriteCount += 1;
-        _isFavorited = true;
-      }
-    });
-  }
+  setState(() {
+    if (_isFavorited) {
+      _favoriteCount -= 1;
+      _isFavorited = false;
+    } else {
+      _favoriteCount += 1;
+      _isFavorited = true;
+    }
+  });
+}
 
-  @override
+   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisSize: MainAxisSize.min,
