@@ -1,63 +1,78 @@
-// ParentWidget manages the state for TapboxB.
-
-//------------------------ ParentWidget --------------------------------
-
 import 'package:flutter/material.dart';
 
-class ParentWidget extends StatefulWidget {
+//Parent Manages Favorite B
+
+class ParentManageB extends StatefulWidget {
   @override
-  _ParentWidgetState createState() => _ParentWidgetState();
+  _ParentManageBState createState() => _ParentManageBState();
 }
 
-class _ParentWidgetState extends State<ParentWidget> {
-  bool _active = false;
+class _ParentManageBState extends State<ParentManageB> {
+  bool _isFavorited = true;
+  int _favoriteCount = 41;
 
   void _handleTapboxChanged(bool newValue) {
     setState(() {
-      _active = newValue;
+      _isFavorited = newValue;
+      if (_isFavorited) {
+        _favoriteCount += 1;
+      } else {
+        _favoriteCount -= 1;
+      }
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: TapboxB(
-        active: _active,
-        onChanged: _handleTapboxChanged,
-      ),
+      child: FavoriteB(
+          isFavorited: _isFavorited,
+          onChanged: _handleTapboxChanged,
+          favoriteCount: _favoriteCount),
     );
   }
 }
 
-//------------------------- TapboxB ----------------------------------
+//Favorite B
 
-class TapboxB extends StatelessWidget {
-  TapboxB({Key key, this.active: false, @required this.onChanged})
+class FavoriteB extends StatelessWidget {
+  FavoriteB(
+      {Key key,
+      this.isFavorited: false,
+      @required this.onChanged,
+      this.favoriteCount})
       : super(key: key);
 
-  final bool active;
+  final bool isFavorited;
+  final favoriteCount;
   final ValueChanged<bool> onChanged;
 
   void _handleTap() {
-    onChanged(!active);
+    onChanged(!isFavorited);
   }
 
+  @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: _handleTap,
-      child: Container(
-        child: Center(
-          child: Text(
-            active ? 'Active' : 'Inactive',
-            style: TextStyle(fontSize: 32.0, color: Colors.white),
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+          padding: EdgeInsets.all(0),
+          child: IconButton(
+            padding: EdgeInsets.all(0),
+            alignment: Alignment.centerRight,
+            icon: (isFavorited ? Icon(Icons.star) : Icon(Icons.star_border)),
+            color: Colors.red[500],
+            onPressed: _handleTap,
           ),
         ),
-        width: 200.0,
-        height: 200.0,
-        decoration: BoxDecoration(
-          color: active ? Colors.lightGreen[700] : Colors.grey[600],
+        SizedBox(
+          width: 18,
+          child: Container(
+            child: Text('$favoriteCount'),
+          ),
         ),
-      ),
+      ],
     );
   }
 }
